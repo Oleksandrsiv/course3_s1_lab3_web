@@ -9,10 +9,12 @@ namespace course3_s1_lab1_web.Controllers;
 public class FactoriesController : ControllerBase
 {
     private readonly IFactoryService _factoryService;
+    private readonly ICarService _carService;
 
-    public FactoriesController(IFactoryService factoryService)
+    public FactoriesController(IFactoryService factoryService, ICarService carService)
     {
         _factoryService = factoryService;
+        _carService = carService;
     }
 
     [HttpGet]
@@ -60,5 +62,18 @@ public class FactoriesController : ControllerBase
             return NotFound();
         }
         return NoContent();
+    }
+
+    [HttpGet("{id}/cars")]
+    public async Task<ActionResult<IEnumerable<CarResponseDto>>> GetCarsByFactory(int id)
+    {
+        var cars = await _carService.GetByFactoryIdAsync(id);
+        
+        if (cars == null)
+        {
+            return NotFound(); 
+        }
+        
+        return Ok(cars);
     }
 }

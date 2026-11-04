@@ -29,6 +29,17 @@ public class CarService : ICarService
         return new CarResponseDto { Id = car.Id, ModelName = car.ModelName, FactoryId = car.FactoryId };
     }
 
+    public async Task<IEnumerable<CarResponseDto>?> GetByFactoryIdAsync(int factoryId)
+    {
+        if (!await _factoryRepo.ExistsAsync(factoryId))
+        {
+            return null; 
+        }
+
+        var cars = await _carRepo.GetByFactoryIdAsync(factoryId);
+        return cars.Select(c => new CarResponseDto { Id = c.Id, ModelName = c.ModelName, FactoryId = c.FactoryId });
+    }
+
     public async Task<CarResponseDto?> CreateAsync(CarCreateDto dto)
     {
         if (!await _factoryRepo.ExistsAsync(dto.FactoryId))
