@@ -37,7 +37,7 @@ public class CarService : ICarService
         }
 
         var cars = await _carRepo.GetByFactoryIdAsync(factoryId);
-        return cars.Select(c => new CarResponseDto { Id = c.Id, ModelName = c.ModelName, FactoryId = c.FactoryId });
+        return cars!.Select(c => new CarResponseDto { Id = c.Id, ModelName = c.ModelName, FactoryId = c.FactoryId });
     }
 
     public async Task<CarResponseDto?> CreateAsync(CarCreateDto dto)
