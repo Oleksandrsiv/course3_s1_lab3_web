@@ -6,8 +6,18 @@ using course3_s1_lab1_web.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using course3_s1_lab1_web.Validators;
+using Serilog;
+using course3_s1_lab1_web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.AddMemoryCache();
+
+builder.Services.Configure<CarCatalogSettings>(
+    builder.Configuration.GetSection("CarCatalogSettings"));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -24,6 +34,8 @@ builder.Services.AddScoped<IFactoryService, FactoryService>();
 builder.Services.AddScoped<ICarService, CarService>();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {

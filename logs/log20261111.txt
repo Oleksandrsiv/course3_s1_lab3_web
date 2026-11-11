@@ -1,0 +1,26 @@
+2026-11-11 14:15:13.742 +02:00 [INF] Now listening on: http://localhost:5229
+2026-11-11 14:15:13.809 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-11-11 14:15:13.810 +02:00 [INF] Hosting environment: Development
+2026-11-11 14:15:13.810 +02:00 [INF] Content root path: C:\Users\Comp\VSC\3course\web\course3_s1_lab2_web
+2026-11-11 14:15:45.677 +02:00 [INF] HTTP GET /swagger responded 301 in 23.3150 ms
+2026-11-11 14:15:45.844 +02:00 [INF] HTTP GET /swagger/index.html responded 200 in 135.1852 ms
+2026-11-11 14:15:45.925 +02:00 [INF] HTTP GET /swagger/index.js responded 200 in 0.9384 ms
+2026-11-11 14:15:45.939 +02:00 [INF] HTTP GET /swagger/index.css responded 200 in 17.1087 ms
+2026-11-11 14:15:45.939 +02:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 17.4797 ms
+2026-11-11 14:15:45.964 +02:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 40.2401 ms
+2026-11-11 14:15:45.973 +02:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 50.4218 ms
+2026-11-11 14:15:46.396 +02:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 185.2370 ms
+2026-11-11 14:16:12.598 +02:00 [INF] HTTP GET /api/Cars responded 200 in 1663.4420 ms
+2026-11-11 14:17:33.120 +02:00 [WRN] Модель 'Outback' не є офіційним. Додаємо суфікс.
+2026-11-11 14:17:33.298 +02:00 [INF] Успішно створено автомобіль Outback_unauthorized з ID 8
+2026-11-11 14:17:33.320 +02:00 [INF] HTTP POST /api/Cars responded 201 in 442.1626 ms
+2026-11-11 14:18:59.477 +02:00 [INF] Now listening on: http://localhost:5229
+2026-11-11 14:18:59.542 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-11-11 14:18:59.544 +02:00 [INF] Hosting environment: Development
+2026-11-11 14:18:59.544 +02:00 [INF] Content root path: C:\Users\Comp\VSC\3course\web\course3_s1_lab2_web
+2026-11-11 14:19:27.948 +02:00 [INF] HTTP GET /api/Cars/8 responded 200 in 1489.5239 ms
+2026-11-11 14:19:31.475 +02:00 [INF] Автомобіль з ID 8 було успішно видалено
+2026-11-11 14:19:31.477 +02:00 [INF] HTTP DELETE /api/Cars/8 responded 204 in 169.6716 ms
+2026-11-11 14:19:34.967 +02:00 [WRN] Модель 'Outback' не є офіційним. Додаємо суфікс.
+2026-11-11 14:19:35.046 +02:00 [INF] Успішно створено автомобіль Outback_unauthorized з ID 9
+2026-11-11 14:19:35.070 +02:00 [INF] HTTP POST /api/Cars responded 201 in 290.2368 ms
