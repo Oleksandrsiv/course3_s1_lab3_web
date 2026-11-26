@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управління автовиробництвом</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="js/app.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Система управління автомобільним виробництвом</h1>
+        <p>Клієнтська частина для REST API (Фабрики та Автомобілі)</p>
+    </header>
+
+    <main>
+        <p id="statusMessage" class="status" role="status" aria-live="polite" hidden></p>
+
+        <section id="factoriesSection">
+            <h2>Фабрики (Виробники)</h2>
+
+            <form id="factoryForm">
+                <fieldset>
+                    <legend id="factoryFormLegend">Додати фабрику</legend>
+
+                    <p class="form-row">
+                        <label for="factoryName">Назва фабрики:</label>
+                        <input
+                            id="factoryName"
+                            name="name"
+                            type="text"
+                            required
+                            minlength="2"
+                            maxlength="100"
+                            placeholder="Наприклад, Subaru">
+                    </p>
+
+                    <p class="form-actions">
+                        <button type="submit" id="factorySubmitBtn">Додати</button>
+                        <button type="button" id="factoryCancelBtn" class="btn-secondary" hidden>Скасувати</button>
+                    </p>
+                </fieldset>
+            </form>
+
+            <table>
+                <caption>Перелік автомобільних фабрик</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Назва</th>
+                        <th scope="col">Дії</th>
+                    </tr>
+                </thead>
+                <tbody id="factoriesTableBody"></tbody>
+            </table>
+        </section>
+
+        <section id="carsSection">
+            <h2>Автомобілі</h2>
+
+            <p id="carFilterBar" class="filter-bar" hidden>
+                <span id="carFilterText"></span>
+                <button type="button" id="resetCarFilterBtn" class="btn-secondary">Показати всі авто</button>
+            </p>
+
+            <form id="carForm">
+                <fieldset>
+                    <legend id="carFormLegend">Додати автомобіль</legend>
+
+                    <p class="form-row">
+                        <label for="carModelName">Назва моделі:</label>
+                        <input
+                            id="carModelName"
+                            name="modelName"
+                            type="text"
+                            required
+                            minlength="2"
+                            maxlength="100"
+                            placeholder="Наприклад, Impreza">
+                    </p>
+
+                    <p class="form-row">
+                        <label for="carFactoryId">Фабрика:</label>
+                        <select id="carFactoryId" name="factoryId" required>
+                            <option value="" disabled selected>Оберіть фабрику...</option>
+                        </select>
+                    </p>
+
+                    <p class="form-actions">
+                        <button type="submit" id="carSubmitBtn">Додати</button>
+                        <button type="button" id="carCancelBtn" class="btn-secondary" hidden>Скасувати</button>
+                    </p>
+                </fieldset>
+            </form>
+
+            <table>
+                <caption>Перелік автомобілів</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Модель</th>
+                        <th scope="col">Фабрика</th>
+                        <th scope="col">Дії</th>
+                    </tr>
+                </thead>
+                <tbody id="carsTableBody"></tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

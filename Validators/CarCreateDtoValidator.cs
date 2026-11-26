@@ -9,6 +9,8 @@ public class CarCreateDtoValidator : AbstractValidator<CarCreateDto>
     {
         RuleFor(x => x.ModelName)
             .NotEmpty().WithMessage("Назва моделі машини не може бути порожньою.")
+            .Must(name => !string.IsNullOrWhiteSpace(name) && name.Trim().Length >= 2)
+            .WithMessage("Назва моделі має містити щонайменше 2 символи без урахування пробілів.")
             .MaximumLength(50).WithMessage("Назва моделі машини не може перевищувати 50 символів.");
 
         RuleFor(x => x.FactoryId)

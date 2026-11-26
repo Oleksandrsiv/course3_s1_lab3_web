@@ -47,7 +47,7 @@ public class CarService : ICarService
         return cars!.Select(c => new CarResponseDto { Id = c.Id, ModelName = c.ModelName, FactoryId = c.FactoryId });
     }
 
-    public async Task<CarResponseDto?> CreateAsync(CarCreateDto dto)
+public async Task<CarResponseDto?> CreateAsync(CarCreateDto dto)
     {
         if (!await _factoryRepo.ExistsAsync(dto.FactoryId))
         {
@@ -55,13 +55,7 @@ public class CarService : ICarService
             return null; 
         }
 
-        var modelName = dto.ModelName;
-
-        if (!_settings.OfficialModels.Contains(modelName))
-        {
-            _logger.LogWarning("Модель '{ModelName}' не є офіційним. Додаємо суфікс.", modelName);
-            modelName += _settings.UnofficialSuffix;
-        }
+        var modelName = NormalizeModelName(dto.ModelName);
 
         var car = new Car { ModelName = modelName, FactoryId = dto.FactoryId };
         await _carRepo.AddAsync(car);
@@ -71,7 +65,7 @@ public class CarService : ICarService
         return new CarResponseDto { Id = car.Id, ModelName = car.ModelName, FactoryId = car.FactoryId };
     }
 
-    public async Task<bool?> UpdateAsync(int id, CarCreateDto dto)
+public async Task<bool?> UpdateAsync(int id, CarCreateDto dto)
     {
         var car = await _carRepo.GetByIdAsync(id);
         if (car == null) return false; 
@@ -82,9 +76,11 @@ public class CarService : ICarService
             return null; 
         }
 
-        car.ModelName = dto.ModelName;
+        car.ModelName = NormalizeModelName(dto.ModelName);
         car.FactoryId = dto.FactoryId;
         await _carRepo.UpdateAsync(car);
+
+        _logger.LogInformation("Оновлено автомобіль з ID {CarId}: {ModelName}", car.Id, car.ModelName);
         return true;
     }
 
@@ -96,5 +92,24 @@ public class CarService : ICarService
         await _carRepo.DeleteAsync(car);
         _logger.LogInformation("Автомобіль з ID {Id} було успішно видалено", id);
         return true;
+    }
+
+    private string NormalizeModelName(string rawModelName)
+    {
+        var modelName = rawModelName.Trim();
+
+        var isOfficial = _settings.OfficialModels.Any(
+            m => m.Equals(modelName, StringComparison.OrdinalIgnoreCase));
+
+        var alreadyHasSuffix = modelName.EndsWith(
+            _settings.UnofficialSuffix, StringComparison.OrdinalIgnoreCase);
+
+        if (!isOfficial && !alreadyHasSuffix)
+        {
+            _logger.LogWarning("Модель '{ModelName}' не є офіційною. Додаємо суфікс.", modelName);
+            modelName += _settings.UnofficialSuffix;
+        }
+
+        return modelName;
     }
 }
